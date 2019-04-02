@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">teamcount2</string>
+    <string name="team">team</string>
+    <string name="count">0</string>
+    <string name="add3">+3 points</string>
+    <string name="add2">+2 points</string>
+    <string name="add1">+1 points</string>
+    <string name="reset">reset</string>
+
+    <string name="hint">cel</string>
+    <string name="btn">change</string>
+    <string name="text">result</string>
+
+    <string name="dollar">dollar</string>
+    <string name="euro">euro</string>
+    <string name="won">won</string>
+    <string name="rmb_hint">INPUT RMB</string>
+
+    <string name="input_dollar_hint">1 dollar=? rmb</string>
+    <string name="change">change</string>
+</resources>
