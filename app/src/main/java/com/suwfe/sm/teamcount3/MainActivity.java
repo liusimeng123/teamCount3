@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Add3(View v) {
-        if(v.getId()==R.id.add3b){
+        if(v.getId()==R.id.add3){
             showCount(3);
         }else{
             showCount2(3);
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Add2(View v) {
-        if(v.getId()==R.id.add2b){
+        if(v.getId()==R.id.add2){
             showCount(2);
         }else{
             showCount2(2);
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Add1(View v) {
-        if(v.getId()==R.id.add1b){
+        if(v.getId()==R.id.add1){
             showCount(1);
         }else{
             showCount2(1);
