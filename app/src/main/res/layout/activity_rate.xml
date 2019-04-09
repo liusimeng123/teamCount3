@@ -36,8 +36,13 @@
     <Button
         android:id="@+id/won"
         android:text="@string/won"
+        android:onClick="onClick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/config"
+        android:text="@string/open_config"
         android:onClick="openOne"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 </LinearLayout>

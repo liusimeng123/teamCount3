@@ -2,21 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="36dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Rate2Activity">
 
-    <TextView
+    <EditText
         android:id="@+id/dollarrate"
         android:hint="@string/input_dollar_hint"
+        android:textSize="35sp"
         android:inputType="numberDecimal"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <Button
-        android:text="@string/change"
+    <EditText
+        android:id="@+id/eurorate"
+        android:hint="@string/input_euro_hint"
+        android:textSize="35sp"
+        android:inputType="numberDecimal"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/wonrate"
+        android:hint="@string/input_won_hint"
+        android:textSize="35sp"
+        android:inputType="numberDecimal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="save"
+        android:text="@string/btn_save" />
 
 </LinearLayout>
