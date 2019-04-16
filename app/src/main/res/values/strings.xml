@@ -19,7 +19,7 @@
     <string name="input_dollar_hint">1 dollar=? rmb</string>
     <string name="input_euro_hint">1 euro=? rmb</string>
     <string name="input_won_hint">1 won=? rmb</string>
-    <string name="open_config">cogfig</string>
+    <string name="open_config">config</string>
     <string name="btn_save">save</string>
     <string name="change">change</string>
     <string name="menu_set_label">Setting</string>
