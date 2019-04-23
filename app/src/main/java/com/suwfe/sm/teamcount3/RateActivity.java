@@ -17,13 +17,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class RateActivity extends AppCompatActivity implements Runnable{
 
@@ -60,9 +62,15 @@ public class RateActivity extends AppCompatActivity implements Runnable{
             @Override
             public void handleMessage(Message msg) {
                 if(msg.what==5){
-                    String str =(String)msg.obj;
-                    Log.i(TAG,"handlemessage:getmessage  msg ="+str);
-                    show.setText(str);
+                   Bundle bdl =(Bundle)msg.obj;
+                    dollarRate=bdl.getFloat("dollar_rate");
+                    euroRate=bdl.getFloat("euro_rate");
+                    wonRate=bdl.getFloat("won_rate");
+                    Log.i(TAG,"HANDLE:DR"+dollarRate);
+                    Log.i(TAG,"HANDLE:ER"+euroRate);
+                    Log.i(TAG,"HANDLE:WR"+wonRate);
+
+                    Toast.makeText(RateActivity.this,"汇率已更新",Toast.LENGTH_SHORT).show();
                 }
                 super.handleMessage(msg);
             }
@@ -141,33 +149,79 @@ public class RateActivity extends AppCompatActivity implements Runnable{
     @Override
     public void run() {
         Log.i(TAG,"run:run()....");
-        for(int i=1;i<6;i++){
-            Log.i(TAG,"run:i="+i);
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
-        Message msg=handler.obtainMessage(5);
-       // msg.what =5;
-        msg.obj ="HEllo from run()";
-        handler.sendMessage(msg);
 
-        URL url = null;
+            Bundle bundle = new Bundle();
+
+
+
+//        URL url = null;
+//        try {
+//            url = new URL("http://www.usd-cny.com/bankofchina.htm");
+//            HttpURLConnection http = (HttpURLConnection) url.openConnection();
+//            InputStream in =http.getInputStream();
+//
+//            String html  = inputStream2String(in);
+//            Log.i(TAG,"run:html="+html);
+//            Document doc =Jsoup.parse(html);
+//
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        Document doc = null;
         try {
-            url = new URL("http://www.usd-cny.com/icbc.htm");
-            HttpURLConnection http = (HttpURLConnection) url.openConnection();
-            InputStream in =http.getInputStream();
+            doc = Jsoup.connect("http://www.usd-cny.com/bankofchina.htm").get();
+            //doc =Jsoup.parse(html);
+            Log.i(TAG,"RUN:"+doc.title());
+            Elements tables =doc.getElementsByTag("table");
+//            for(Element table:tables){
+//                Log.i(TAG,"RUN:table["+i+"]"+table);
+//                i++;
+//            }
+            Element table6 =tables.get(0);
+            //Log.i(TAG,"RUN:table6="+table6);
 
-            String html  = inputStream2String(in);
-            Log.i(TAG,"run:html="+html);
+            Elements tds =table6.getElementsByTag("td");
+            for(Element td :tds){
+                Log.i(TAG,"RUN:td="+td);
+                for(int i=0;i<tds.size();i+=6){
+                    Element td1 =tds.get(i);
+                    Element td2 =tds.get(i+5);
+                    Log.i(TAG,"RUN:"+td1.text()+">>"+td2.text());
+                    String str1 =td1.text();
+                    String val =td2.text();
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+                    if("美元".equals(str1)){
+                          bundle.putFloat("dollar_rate",100f/Float.parseFloat(val));
+                    }else if("欧元".equals(str1)){
+                        bundle.putFloat("euro_rate",100f/Float.parseFloat(val));
+                    }if("韩元".equals(str1)){
+                        bundle.putFloat("won_rate",100f/Float.parseFloat(val));
+                    }
+
+                }
+
+
+        }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+            Message msg=handler.obtainMessage(5);
+            // msg.what =5;
+           // msg.obj ="HEllo from run()";
+            msg.obj =bundle;
+            handler.sendMessage(msg);
+
+
 
     }
     private String inputStream2String(InputStream inputStream) throws IOException {

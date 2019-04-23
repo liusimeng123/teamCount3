@@ -8,20 +8,37 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView count;
-    TextView count2;
+    private  final  String TAG ="second";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        count =(TextView) findViewById(R.id.count);
-        count2 =(TextView) findViewById(R.id.count2);
+    }
+
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        String scorea =((TextView) findViewById(R.id.count)).getText().toString();
+        String scoreb =((TextView) findViewById(R.id.count2)).getText().toString();
+
+        outState.putString("teama_score",scorea);
+        outState.putString("teamb_score",scoreb);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String scorea= savedInstanceState.getString("teama_score");
+        String scoreb= savedInstanceState.getString("teamb_score");
+
+        ((TextView) findViewById(R.id.count)).setText(scorea);
+        ((TextView) findViewById(R.id.count2)).setText(scoreb);
     }
 
     public void Reset(View v) {
-        count.setText("0");
-        count2.setText("0");
+        ((TextView) findViewById(R.id.count)).setText("0");
+        ((TextView) findViewById(R.id.count2)).setText("0");
     }
 
     public void Add3(View v) {
@@ -49,15 +66,17 @@ public class MainActivity extends AppCompatActivity {
 }
     private void showCount(int inc){
         Log.i("show","inc="+inc);
-        String oldCount =(String)count.getText();
+        TextView out=(TextView)findViewById(R.id.count);
+        String oldCount =(String)out.getText();
         int newCount =Integer.parseInt(oldCount)+inc;
-        count.setText(""+newCount);
+       out.setText(""+newCount);
     }
     private void showCount2(int inc){
         Log.i("show","inc="+inc);
-        String oldCount =(String)count2.getText();
+        TextView out2=(TextView)findViewById(R.id.count2);
+        String oldCount =(String)out2.getText();
         int newCount =Integer.parseInt(oldCount)+inc;
-        count2.setText(""+newCount);
+        out2.setText(""+newCount);
     }
 
 }
