@@ -150,7 +150,7 @@ public class RateActivity extends AppCompatActivity implements Runnable{
             config.putExtra("won_rate_key",wonRate);
             startActivityForResult(config,1);
         }else if (item.getItemId()==R.id.open_list){
-            Intent list=new Intent(this,MyListActivity.class);
+            Intent list=new Intent(this,MyList2Activity.class);
             startActivity(list);
         }
         return super.onOptionsItemSelected(item);
