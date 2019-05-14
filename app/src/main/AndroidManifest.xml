@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RateCalcActivity"></activity>
-        <activity android:name=".MyList2Activity" />
-        <activity android:name=".MyListActivity" />
-        <activity android:name=".RateListActivity" />
+        <activity android:name=".RateCalcActivity" android:theme="@style/Base.Theme.AppCompat.Light.Dialog"></activity>
+        <activity android:name=".MyList2Activity" >
+        </activity>
+        <activity android:name=".MyListActivity" >
+        </activity>
+        <activity android:name=".RateListActivity" >
+        </activity>
         <activity android:name=".Rate2Activity" />
         <activity android:name=".TepActivity" />
         <activity android:name=".RateActivity">
