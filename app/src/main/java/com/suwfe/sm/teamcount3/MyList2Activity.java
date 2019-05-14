@@ -130,11 +130,14 @@ public class MyList2Activity extends ListActivity implements Runnable, AdapterVi
         String title2 =String.valueOf(title.getText());
         String detail2 =String.valueOf(detail.getText());
 
+        //打开新的页面，传入参数
         Intent rateCalc = new Intent(this,RateCalcActivity.class);
         rateCalc.putExtra("title",titleStr);
         rateCalc.putExtra("rate",Float.parseFloat(detailStr));
         startActivity(rateCalc);
     }
+
+
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
