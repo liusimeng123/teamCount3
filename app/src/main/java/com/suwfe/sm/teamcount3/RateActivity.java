@@ -49,6 +49,7 @@ public class RateActivity extends AppCompatActivity implements Runnable{
         rmb =(EditText)findViewById(R.id.rmb);
         show=(TextView)findViewById(R.id.showout);
 
+        //获取SP里保存的数据
         SharedPreferences sharedPreferences =getSharedPreferences("myrate", Activity.MODE_PRIVATE);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         dollarRate = sharedPreferences.getFloat("dollar_rate",0.0f);
@@ -150,8 +151,20 @@ public class RateActivity extends AppCompatActivity implements Runnable{
             config.putExtra("won_rate_key",wonRate);
             startActivityForResult(config,1);
         }else if (item.getItemId()==R.id.open_list){
-            Intent list=new Intent(this,MyList2Activity.class);
+            Intent list=new Intent(this,RateListActivity.class);
             startActivity(list);
+            //测试数据库
+//            RateItem item1 =new RateItem("aaaa","123");
+//            RateManager manager =new RateManager(this);
+//            manager.add(item1);
+//            manager.add(new RateItem("bbbb","23.5"));
+//            Log.i(TAG, "onOptionsItemSelected: 写入数据完毕");
+//
+//            //查询所有数据
+//            List<RateItem> testList =manager.listAll();
+//            for(RateItem i: testList){
+//                Log.i(TAG, "onOptionsItemSelected: 取出数据[id="+i.getId()+"]Name="+i.getCurName()+"Rate ="+i.getCurRate());
+//            }
         }
         return super.onOptionsItemSelected(item);
     }
